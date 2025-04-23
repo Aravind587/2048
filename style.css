@@ -1,0 +1,190 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center vertically */
+    background-color: #faf8ef;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    box-sizing: border-box;
+}
+.game-container {
+    text-align: center;
+    margin: 0 auto; /* Remove top/bottom margin to avoid extra spacing */
+    width: 100%;
+    max-width: 440px;
+}
+.score {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 2.5%;
+    background-color: #bbada0;
+    padding: 2.5%;
+    border-radius: 10px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    touch-action: none;
+}
+.tile {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+    background-color: #cdc1b4;
+    border-radius: 5px;
+    transition: transform 0.1s;
+    color: #776e65;
+    box-sizing: border-box;
+}
+.tile span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    font-weight: bold;
+    color: inherit;
+}
+.tile[data-value="2"] { background-color: #eee4da; }
+.tile[data-value="4"] { background-color: #ede0c8; }
+.tile[data-value="8"] { background-color: #f2b179; }
+.tile[data-value="16"] { background-color: #f59563; }
+.tile[data-value="32"] { background-color: #f67c5f; }
+.tile[data-value="64"] { background-color: #f65e3b; }
+.tile[data-value="128"] { background-color: #edcf72; }
+.tile[data-value="256"] { background-color: #edcc61; }
+.tile[data-value="512"] { background-color: #edc850; }
+.tile[data-value="1024"] { background-color: #edc53f; }
+.tile[data-value="2048"] { background-color: #edc22e; }
+.tile[data-value="4096"] { background-color: #e8b923; }
+.tile[data-value="8192"] { background-color: #e3a718; }
+.tile[data-value="16384"] { background-color: #de950d; }
+.tile[data-value="32768"] { background-color: #d98302; }
+.tile[data-value="65536"] { background-color: #d47000; }
+.tile[data-value="131072"] { background-color: #cf5d00; }
+.tile[data-value="0"] { background-color: #cdc1b4; }
+.tile[data-value="0"] span { color: transparent; }
+.tile[data-value="2048"],
+.tile[data-value="4096"],
+.tile[data-value="8192"],
+.tile[data-value="16384"],
+.tile[data-value="32768"],
+.tile[data-value="65536"],
+.tile[data-value="131072"] { color: #f9f6f2; }
+.tile[data-value="2048"] span,
+.tile[data-value="4096"] span,
+.tile[data-value="8192"] span,
+.tile[data-value="16384"] span,
+.tile[data-value="32768"] span,
+.tile[data-value="65536"] span,
+.tile[data-value="131072"] span { font-size: 32px; }
+.message {
+    font-size: 20px;
+    margin: 20px 0;
+    color: #776e65;
+}
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px;
+    cursor: pointer;
+    background-color: #8f7a66;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+button:hover {
+    background-color: #548ed0;
+}
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f9f6f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+    width: 80%;
+    max-width: 400px;
+}
+.popup.show {
+    display: block;
+}
+.popup button {
+    margin: 10px;
+}
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+.overlay.show {
+    display: block;
+}
+
+/* Responsive adjustments for 480px and above */
+@media (min-width: 480px) {
+    .game-container {
+        max-width: 480px;
+    }
+    .tile span {
+        font-size: 40px;
+    }
+    .tile[data-value="2048"] span,
+    .tile[data-value="4096"] span,
+    .tile[data-value="8192"] span,
+    .tile[data-value="16384"] span,
+    .tile[data-value="32768"] span,
+    .tile[data-value="65536"] span,
+    .tile[data-value="131072"] span {
+        font-size: 36px;
+    }
+    button {
+        font-size: 20px;
+    }
+    .message {
+        font-size: 22px;
+    }
+}
+
+/* Responsive adjustments for 786px and above */
+@media (min-width: 786px) {
+    .game-container {
+        max-width: 440px;
+    }
+    .tile span {
+        font-size: 36px;
+    }
+    .tile[data-value="2048"] span,
+    .tile[data-value="4096"] span,
+    .tile[data-value="8192"] span,
+    .tile[data-value="16384"] span,
+    .tile[data-value="32768"] span,
+    .tile[data-value="65536"] span,
+    .tile[data-value="131072"] span {
+        font-size: 32px;
+    }
+    button {
+        font-size: 25px;
+    }
+    .message {
+        font-size: 20px;
+    }
+}
